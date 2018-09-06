@@ -10,6 +10,7 @@ public class SpriteMove2DArray : MonoBehaviour {
     [SerializeField]
     Transform[] transforms;
 
+    int altSpeed = 1;
 	// Use this for initialization
 	void Start () {
        // transforms = this.gameObject.GetComponent<Transform>();	
@@ -18,15 +19,18 @@ public class SpriteMove2DArray : MonoBehaviour {
 	// Update is called once per frame
         void FixedUpdate()
         {
-            float moveHorizontal = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-            float moveVertical = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
-        // move many objects at once
+
+        altSpeed = 1;
         foreach (Transform T in transforms)
         {
+            altSpeed++;
+            moveSpeed = altSpeed *2;
+            // move many objects at once
+            float moveHorizontal = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+            float moveVertical = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
             T.Translate(new Vector3(moveHorizontal, moveVertical));
         }
 
-         
         }
     
 }
